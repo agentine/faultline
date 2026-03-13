@@ -138,6 +138,13 @@ func (s *stack) Format(st fmt.State, verb rune) {
 	}
 }
 
+// StackTrace returns the call stack frames as a StackTrace slice.
+// Errors created by New, Errorf, Wrap, Wrapf, and WithStack implement
+// this method, accessible via the stackTracer interface:
+//
+//	type stackTracer interface {
+//	    StackTrace() StackTrace
+//	}
 func (s *stack) StackTrace() StackTrace {
 	f := make([]Frame, len(*s))
 	for i := 0; i < len(f); i++ {

@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.1.0
+## v0.1.0 — 2026-03-13
 
 Initial release — drop-in replacement for `github.com/pkg/errors`.
 

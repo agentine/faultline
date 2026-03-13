@@ -76,6 +76,25 @@ root := faultline.Cause(wrapped)
 | `Frame` | A program counter representing a stack frame |
 | `StackTrace` | A slice of `Frame` values from innermost to outermost |
 
+## Accessing Stack Traces
+
+Errors created by faultline expose a `StackTrace()` method via the `stackTracer` interface. This is useful for logging integrations (logrus, zerolog, slog, etc.) that want to extract structured frame data.
+
+```go
+type stackTracer interface {
+    StackTrace() faultline.StackTrace
+}
+
+err := faultline.New("something failed")
+if st, ok := err.(stackTracer); ok {
+    for _, f := range st.StackTrace() {
+        fmt.Printf("%+v\n", f)
+    }
+}
+```
+
+Each `faultline.Frame` supports `%s` (file), `%d` (line), `%n` (function name), and `%+s` / `%+v` for the full function+file format.
+
 ## Migration from pkg/errors
 
 One-liner import replacement:

@@ -25,6 +25,13 @@ func ExampleWrap() {
 	// Output: context: original
 }
 
+func ExampleWrapf() {
+	cause := faultline.New("original")
+	err := faultline.Wrapf(cause, "attempt %d failed", 3)
+	fmt.Println(err)
+	// Output: attempt 3 failed: original
+}
+
 func ExampleCause() {
 	cause := faultline.New("original")
 	err := faultline.Wrap(cause, "context")
