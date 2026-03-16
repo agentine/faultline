@@ -52,7 +52,7 @@ func BenchmarkCause(b *testing.B) {
 	base := errors.New("base")
 	chain := Wrap(Wrap(Wrap(base, "l1"), "l2"), "l3")
 	for i := 0; i < b.N; i++ {
-		Cause(chain)
+		benchErr = Cause(chain)
 	}
 }
 
