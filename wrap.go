@@ -114,15 +114,15 @@ func (w *withStack) Format(s fmt.State, verb rune) {
 	switch verb {
 	case 'v':
 		if s.Flag('+') {
-			fmt.Fprintf(s, "%+v", w.Cause())
+			_, _ = fmt.Fprintf(s, "%+v", w.Cause())
 			w.stack.Format(s, verb)
 			return
 		}
 		fallthrough
 	case 's':
-		fmt.Fprintf(s, "%s", w.cause)
+		_, _ = fmt.Fprintf(s, "%s", w.cause)
 	case 'q':
-		fmt.Fprintf(s, "%q", w.cause)
+		_, _ = fmt.Fprintf(s, "%q", w.cause)
 	}
 }
 
@@ -140,15 +140,15 @@ func (w *withMessage) Format(s fmt.State, verb rune) {
 	switch verb {
 	case 'v':
 		if s.Flag('+') {
-			fmt.Fprintf(s, "%+v\n", w.Cause())
-			fmt.Fprintf(s, "%s", w.msg)
+			_, _ = fmt.Fprintf(s, "%+v\n", w.Cause())
+			_, _ = fmt.Fprintf(s, "%s", w.msg)
 			return
 		}
 		fallthrough
 	case 's':
-		fmt.Fprintf(s, "%s", w.Error())
+		_, _ = fmt.Fprintf(s, "%s", w.Error())
 	case 'q':
-		fmt.Fprintf(s, "%q", w.Error())
+		_, _ = fmt.Fprintf(s, "%q", w.Error())
 	}
 }
 
@@ -168,15 +168,15 @@ func (w *withCause) Format(s fmt.State, verb rune) {
 	switch verb {
 	case 'v':
 		if s.Flag('+') {
-			fmt.Fprintf(s, "%+v\n", w.Cause())
-			fmt.Fprintf(s, "%s", w.msg)
+			_, _ = fmt.Fprintf(s, "%+v\n", w.Cause())
+			_, _ = fmt.Fprintf(s, "%s", w.msg)
 			w.stack.Format(s, verb)
 			return
 		}
 		fallthrough
 	case 's':
-		fmt.Fprintf(s, "%s", w.Error())
+		_, _ = fmt.Fprintf(s, "%s", w.Error())
 	case 'q':
-		fmt.Fprintf(s, "%q", w.Error())
+		_, _ = fmt.Fprintf(s, "%q", w.Error())
 	}
 }

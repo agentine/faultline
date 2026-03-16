@@ -39,14 +39,14 @@ func (f *fundamental) Format(s fmt.State, verb rune) {
 	switch verb {
 	case 'v':
 		if s.Flag('+') {
-			fmt.Fprintf(s, "%s", f.msg)
+			_, _ = fmt.Fprintf(s, "%s", f.msg)
 			f.stack.Format(s, verb)
 			return
 		}
 		fallthrough
 	case 's':
-		fmt.Fprintf(s, "%s", f.msg)
+		_, _ = fmt.Fprintf(s, "%s", f.msg)
 	case 'q':
-		fmt.Fprintf(s, "%q", f.msg)
+		_, _ = fmt.Fprintf(s, "%q", f.msg)
 	}
 }
